@@ -12,14 +12,14 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true;
 
-  boot.initrd.luks.devices = [
-    {
-      name = "home";
-      device = "/dev/disk/by-uuid/8ad1a856-32f4-4691-a168-f897a8053e5a";
-      preLVM = true;
-      # allowDiscards = true;
-    }
-  ];
+#   boot.initrd.luks.devices = [
+#     {
+#       name = "home";
+#       device = "/dev/disk/by-uuid/ae395e98-c3b0-4203-8322-22985fdd970f";
+#       preLVM = true;
+#       # allowDiscards = true;
+#     }
+#   ];
 
   # let's have a bootsplash!
   boot.plymouth = {
