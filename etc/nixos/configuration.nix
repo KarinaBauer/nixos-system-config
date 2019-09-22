@@ -12,8 +12,14 @@
     grub.useOSProber = true;
   };
 
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
+  };
+
   # Nvidia optimus support
   hardware.bumblebee.enable = true;
+  hardware.bluetooth.enable = true;
 
   boot.plymouth = {
     enable = true;
@@ -39,7 +45,7 @@
     autoLogin.user = "k";
   };
 
-  nix.autoOptimiseStore = true;
+  nix.autoOptimiseStore = false;
 
   networking = {
     hostName = "rina";
@@ -64,10 +70,13 @@
 
   # "nix search pkgname" for search
   environment.systemPackages = with pkgs; [
-    wget curl nano htop flatpak
-    ncdu tree nox ntp nginx
-    git plymouth gpm pciutils
+    wget curl nano htop
+    flatpak ncdu tree nox
+    ntp nginx git plymouth
+    gpm pciutils lm_sensors
     fuse ifuse sshfs-fuse
+    python37Packages.pip
+    python37Packages.setuptools
 
     latte-dock
     libsForQt5.qtstyleplugin-kvantum
@@ -80,7 +89,7 @@
     konsole krfb kwalletmanager
     marble okteta okular
     youtube-dl vlc gparted
-    electrum chromium firefox
+    firefox google-chrome transmission-gtk
   ];
 
   programs.mtr.enable = true;
@@ -91,7 +100,6 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   networking.firewall.enable = false;
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
 
   nixpkgs.config.packageOverrides = pkgs: {
     nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
